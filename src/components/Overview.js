@@ -5,7 +5,7 @@ function Overview(props) {
     return (
         <ul>
             {tasks.map((task) => {
-                return <li key={task.id}>{task.text}</li>
+                return <ul key={task.id}>{task.number}. {task.text}</ul>
             })}
         </ul>
     );
