@@ -9,11 +9,10 @@ class App extends Component {
       task: { 
         text: '',
         id: uniqid(),
-        number: 1,
       },
       tasks: [],
     };
-
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleChange = (e) => {
@@ -21,7 +20,6 @@ class App extends Component {
       task: {
         text: e.target.value,
         id: uniqid(),
-        number: this.state.task.number
       }
     });
   };
@@ -33,8 +31,13 @@ class App extends Component {
       task: { 
         text : '',
         id: uniqid(),
-        number: this.state.task.number + 1,
      }, 
+    });
+  }
+
+  handleDelete (id) {
+    this.setState({
+      tasks: this.state.tasks.filter((task) => task.id !== id)
     });
   }
 
@@ -48,7 +51,7 @@ class App extends Component {
           <input onChange={this.handleChange} value={task.text} type="text" id="taskInput"/>
           <button type="submit"> Add Task</button>
         </form>
-        <Overview tasks={tasks} />
+        <Overview tasks={tasks} handleDelete={this.handleDelete}/>
       </div>
     );
   }
