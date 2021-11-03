@@ -1,12 +1,14 @@
 import React from "react";
 
 function Overview(props) {
-    const posts = props.posts;
-    const list = posts.map(post => 
-    <li key={post.toString()}>{post}</li>)
+    const { tasks } = props;
     return (
-        <ul>{list}</ul>
-    )
-}
+        <ul>
+            {tasks.map((task) => {
+                return <li key={task.id}>{task.text}</li>
+            })}
+        </ul>
+    );
+};
 
 export default Overview
