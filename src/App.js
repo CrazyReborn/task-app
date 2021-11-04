@@ -9,10 +9,11 @@ class App extends Component {
       task: { 
         text: '',
         id: uniqid(),
+        isEditing: false,
       },
       tasks: [],
     };
-    //this.handleDelete = this.handleDelete.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
 
@@ -36,10 +37,25 @@ class App extends Component {
     });
   }
 
-  handleEdit(id) {
-    console.log(this.state.tasks.find(task => task.id === id))
+  handleEdit(e, task) {
+    e.preventDefault();
+    const prevTasks = this.state.tasks.slice();
+    const foundTaskIndex = prevTasks.indexOf(task);
+    prevTasks[foundTaskIndex].isEditing = !task.isEditing;
+    this.setState({
+      tasks: prevTasks,
+    })
   }
-
+///THIS DOESN"T WORK
+  hadleResubmit(e, task) {
+    e.preventDefault();
+    const prevTasks = this.state.tasks.slice();
+    const foundTaskIndex = prevTasks.indexOf(task);
+    prevTasks[foundTaskIndex].text = 'idk';
+    this.setState({
+      tasks: prevTasks,
+    })
+  }
 
   handleDelete (id) {
     this.setState({
@@ -57,7 +73,8 @@ class App extends Component {
           <input onChange={this.handleChange} value={task.text} type="text" id="taskInput"/>
           <button type="submit"> Add Task</button>
         </form>
-        <Overview tasks={tasks} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
+        <Overview tasks={tasks} handleEdit={this.handleEdit} handleDelete={this.handleDelete}
+        edited={this.state.edited} />
       </div>
     );
   }
