@@ -12,7 +12,8 @@ class App extends Component {
       },
       tasks: [],
     };
-    this.handleDelete = this.handleDelete.bind(this);
+    //this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleChange = (e) => {
@@ -35,6 +36,11 @@ class App extends Component {
     });
   }
 
+  handleEdit(id) {
+    console.log(this.state.tasks.find(task => task.id === id))
+  }
+
+
   handleDelete (id) {
     this.setState({
       tasks: this.state.tasks.filter((task) => task.id !== id)
@@ -51,7 +57,7 @@ class App extends Component {
           <input onChange={this.handleChange} value={task.text} type="text" id="taskInput"/>
           <button type="submit"> Add Task</button>
         </form>
-        <Overview tasks={tasks} handleDelete={this.handleDelete}/>
+        <Overview tasks={tasks} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
       </div>
     );
   }
