@@ -15,6 +15,7 @@ class App extends Component {
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleResubmit = this.handleResubmit.bind(this);
   }
 
   handleChange = (e) => {
@@ -47,11 +48,11 @@ class App extends Component {
     })
   }
 ///THIS DOESN"T WORK
-  hadleResubmit(e, task) {
+  handleResubmit(e, task, newValue) {
     e.preventDefault();
     const prevTasks = this.state.tasks.slice();
     const foundTaskIndex = prevTasks.indexOf(task);
-    prevTasks[foundTaskIndex].text = 'idk';
+    prevTasks[foundTaskIndex].text = newValue;
     this.setState({
       tasks: prevTasks,
     })
@@ -74,7 +75,7 @@ class App extends Component {
           <button type="submit"> Add Task</button>
         </form>
         <Overview tasks={tasks} handleEdit={this.handleEdit} handleDelete={this.handleDelete}
-        edited={this.state.edited} />
+        handleResubmit={this.handleResubmit} />
       </div>
     );
   }
